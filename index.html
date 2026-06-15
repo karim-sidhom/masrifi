@@ -697,7 +697,26 @@
     <div class="ornament-divider">✦ ⛽ ★ ⛽ ✦</div>
 
     <!-- أرقام الطوارئ -->
-    <div class="emergency-card">
+    <!-- Bank Selector -->
+    <div style="background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(12px);">
+        <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 12px; font-weight: 600;">اختر بنكاً:</div>
+        <div id="bank-selector" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+            <button onclick="filterByBank('BNA')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">BNA</button>
+            <button onclick="filterByBank('STB')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">STB</button>
+            <button onclick="filterByBank('BIAT')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">BIAT</button>
+            <button onclick="filterByBank('UIB')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">UIB</button>
+            <button onclick="filterByBank('ATB')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">ATB</button>
+            <button onclick="filterByBank('UBCI')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">UBCI</button>
+            <button onclick="filterByBank('BTL')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">BTL</button>
+            <button onclick="filterByBank('ATTIJARI')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Attijari</button>
+            <button onclick="filterByBank('ZITOUNA')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Zitouna</button>
+            <button onclick="filterByBank('WIFAK')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Wifak</button>
+            <button onclick="filterByBank('BT')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">BT</button>
+            <button onclick="filterByBank('BFT')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">1881-BFT</button>
+        </div>
+    </div>
+
+    <!-- emergency card -->
         <div class="emergency-icon">🚨</div>
         <div style="flex:1">
             <div class="emergency-title" id="emergency-title">أرقام الطوارئ</div>
@@ -800,7 +819,7 @@ async function findNearby(lat,lon){
     if(seq!==stationSearchSeq)return;
     const parts=[geo.city,geo.state,geo.country].filter(Boolean);
     const label=[...new Set(parts)].join('، ');
-    const norm=places=>places.map(p=>{const mL=parseFloat(p.lat),mO=parseFloat(p.lon);const n=p.name||(p.display_name&&p.display_name.split(',')[0].trim())||'بنك';return{name:n,lat:mL,lon:mO,dist:haversineKm(lat,lon,mL,mO)};}).sort((a,b)=>a.dist-b.dist);
+    const norm=places=>places.filter(p=>isValidBank(p)).map(p=>{const mL=parseFloat(p.lat),mO=parseFloat(p.lon);const n=p.name||(p.display_name&&p.display_name.split(',')[0].trim())||'بنك';return{name:n,lat:mL,lon:mO,dist:haversineKm(lat,lon,mL,mO)};}).sort((a,b)=>a.dist-b.dist);
     async function tryR(rIdx,req=true){
         const r=RADII[rIdx]; if(!r)return false;
         stationState(`⛽ البحث في نطاق ${r<1?r*1000+' م':r+' كم'}...`);
@@ -984,7 +1003,57 @@ function renderPrayerTimes(lat, lng) {
     }
 }
 
-// ══ ADHAN PLAYER ══
+let currentBankFilter = null;
+
+function filterByBank(bankCode) {
+    currentBankFilter = bankCode;
+    // Update button styles
+    const buttons = document.querySelectorAll('#bank-selector button');
+    buttons.forEach(btn => {
+        if(btn.textContent === bankCode) {
+            btn.style.background = 'linear-gradient(135deg, rgba(255,204,0,0.4), rgba(255,204,0,0.2))';
+            btn.style.boxShadow = '0 0 15px rgba(255,204,0,0.3)';
+        } else {
+            btn.style.background = 'rgba(255,204,0,0.15)';
+            btn.style.boxShadow = 'none';
+        }
+    });
+    
+    // Trigger search again with filter
+    if(currentLat && currentLng) {
+        findNearby(currentLat, currentLng);
+    }
+}
+const TUNISIAN_BANKS = {
+    'BNA': 'البنك الوطني الفلاحي',
+    'STB': 'البنك الوطني التونسي',
+    'BIAT': 'البنك الدولي العربي التونسي',
+    'UIB': 'البنك الوحدة الإنجاز البنكي',
+    'ATB': 'البنك العربي التونسي',
+    'UBCI': 'اتحاد البنوك الإسلامية',
+    'Attijari': 'بنك التجارة',
+};
+
+function isValidBank(place) {
+    const name = (place.name || '').toUpperCase();
+    const displayName = (place.display_name || '').toUpperCase();
+    
+    // Keywords to identify banks
+    const bankKeywords = ['BANK', 'BANQUE', 'بنك', 'AGENCE', 'ATM', 'DAB'];
+    const isBankWord = bankKeywords.some(kw => name.includes(kw) || displayName.includes(kw));
+    
+    // Exclude non-banks
+    const excludeKeywords = ['CAFE', 'RESTAURANT', 'HOTEL', 'SHOP', 'MARKET'];
+    const isExcluded = excludeKeywords.some(kw => name.includes(kw) || displayName.includes(kw));
+    
+    // Filter by selected bank if any
+    if(currentBankFilter) {
+        const hasBank = name.includes(currentBankFilter) || displayName.includes(currentBankFilter);
+        return isBankWord && !isExcluded && hasBank;
+    }
+    
+    return isBankWord && !isExcluded;
+}
 let adhanAudio = null;
 let adhanPlaying = false;
 
