@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مصرفي</title>
-    <meta name="theme-color" content="#0d1a6e">
-    <meta name="description" content="مصرفي - شبكة البنوك - تحديد البنوك القريبة منك مع أوقات الصلاة">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="مصرفي">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%230d1a6e' width='180' height='180'/><text x='90' y='100' font-size='80' fill='%23ffd700' text-anchor='middle' dy='.3em'>🏦</text></svg>">
-    <link rel="manifest" href="data:application/json,{%22name%22:%22مصرفي%20-%20شبكة%20البنوك%22,%22short_name%22:%22مصرفي%22,%22description%22:%22تحديد%20البنوك%20والصلاة%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22background_color%22:%22%230d1a6e%22,%22theme_color%22:%22%23ffd700%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20192%20192'><rect%20fill='%230d1a6e'%20width='192'%20height='192'/><text%20x='96'%20y='110'%20font-size='90'%20fill='%23ffd700'%20text-anchor='middle'%20dy='.3em'>🏦</text></svg>%22,%22sizes%22:%22192x192%22,%22type%22:%22image/svg+xml%22,%22purpose%22:%22any%22},{%22src%22:%22data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'><rect%20fill='%230d1a6e'%20width='512'%20height='512'/><text%20x='256'%20y='290'%20font-size='240'%20fill='%23ffd700'%20text-anchor='middle'%20dy='.3em'>🏦</text></svg>%22,%22sizes%22:%22512x512%22,%22type%22:%22image/svg+xml%22,%22purpose%22:%22any%22}],%22categories%22:[%22finance%22],%22screenshots%22:[{%22src%22:%22data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20540%20720'><rect%20fill='%230d1a6e'%20width='540'%20height='720'/><text%20x='270'%20y='360'%20font-size='100'%20fill='%23ffd700'%20text-anchor='middle'>مصرفي</text></svg>%22,%22sizes%22:%22540x720%22,%22type%22:%22image/svg+xml%22}]}">
+    <meta name="theme-color" content="#0d1a06">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
     <style>
@@ -704,26 +697,7 @@
     <div class="ornament-divider">✦ ⛽ ★ ⛽ ✦</div>
 
     <!-- أرقام الطوارئ -->
-    <!-- Bank Selector -->
-    <div style="background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(12px);">
-        <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 12px; font-weight: 600;">اختر بنكاً:</div>
-        <div id="bank-selector" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
-            <button onclick="filterByBank('BNA')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">BNA</button>
-            <button onclick="filterByBank('STB')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">STB</button>
-            <button onclick="filterByBank('BIAT')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">BIAT</button>
-            <button onclick="filterByBank('UIB')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">UIB</button>
-            <button onclick="filterByBank('ATB')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">ATB</button>
-            <button onclick="filterByBank('UBCI')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">UBCI</button>
-            <button onclick="filterByBank('BTL')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">BTL</button>
-            <button onclick="filterByBank('ATTIJARI')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Attijari</button>
-            <button onclick="filterByBank('ZITOUNA')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Zitouna</button>
-            <button onclick="filterByBank('WIFAK')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">Wifak</button>
-            <button onclick="filterByBank('BT')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">1884-BT</button>
-            <button onclick="filterByBank('BFT')" style="padding: 10px; background: rgba(255,204,0,0.15); border: 1px solid var(--gold-bright); color: var(--gold-shine); border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.3s;">1881-BFT</button>
-        </div>
-    </div>
-
-    <!-- emergency card -->
+    <div class="emergency-card">
         <div class="emergency-icon">🚨</div>
         <div style="flex:1">
             <div class="emergency-title" id="emergency-title">أرقام الطوارئ</div>
@@ -819,7 +793,7 @@ async function fetchStations(lat,lon,r,ctrl){
 
 async function reverseGeocode(lat,lon){try{const res=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=ar`);if(!res.ok)throw new Error('');const d=await res.json();if(d&&d.address){const cc=d.address.country_code?d.address.country_code.toUpperCase():'';const city=d.address.city||d.address.town||d.address.village||'';const state=d.address.state||'';const country=d.address.country||'';return{countryCode:cc,city,state,country};}}catch(e){}return{countryCode:'',city:'',state:'',country:''};}
 
-    async function findNearby(lat,lon){
+async function findNearby(lat,lon){
     const seq=++stationSearchSeq;
     stationState('جارٍ البحث عن البنوك...');
     const geo=await reverseGeocode(lat,lon);
@@ -829,20 +803,20 @@ async function reverseGeocode(lat,lon){try{const res=await fetch(`https://nomina
     const norm=places=>places.filter(p=>isValidBank(p)).map(p=>{const mL=parseFloat(p.lat),mO=parseFloat(p.lon);const n=p.name||(p.display_name&&p.display_name.split(',')[0].trim())||'بنك';return{name:n,lat:mL,lon:mO,dist:haversineKm(lat,lon,mL,mO)};}).sort((a,b)=>a.dist-b.dist);
     async function tryR(rIdx,req=true){
         const r=RADII[rIdx]; if(!r)return false;
-        stationState(`🏦 البحث في نطاق ${r<1?r*1000+' م':r+' كم'}...`);
+        stationState(`⛽ البحث في نطاق ${r<1?r*1000+' م':r+' كم'}...`);
         let pay,t=null;
         try{const ctrl=new AbortController();t=setTimeout(()=>ctrl.abort(),12000);pay=await fetchStations(lat,lon,r,ctrl);}
         catch(e){if(seq!==stationSearchSeq)return true;stationState('⚠️ تعذّر الاتصال بالخوادم. حاول مجدداً.');return true;}
         finally{if(t)clearTimeout(t);}
         if(seq!==stationSearchSeq)return true;
         const items=norm(pay.places||[]).filter(m=>m.dist<=r);
-        if(!items.length){if(req)return false;stationState(`لم يتم العثور على بنوك في نطاق ${r} كم.`);return true;}
+        if(!items.length){if(req)return false;stationState(`لم يتم العثور على محطات وقود في نطاق ${r} كم.`);return true;}
         const hasNext=rIdx<RADII.length-1;
         renderStations(items,r,5,label,hasNext?()=>tryR(rIdx+1,false):null);
         return true;
     }
     for(let i=0;i<RADII.length;i++){if(await tryR(i))return;}
-    stationState('لم يتم العثور على بنوك في هذه المنطقة.');
+    stationState('لم يتم العثور على محطات وقود في هذه المنطقة.');
 }
 
 function initApp(lat,lng){
@@ -1010,27 +984,7 @@ function renderPrayerTimes(lat, lng) {
     }
 }
 
-let currentBankFilter = null;
-
-function filterByBank(bankCode) {
-    currentBankFilter = bankCode;
-    // Update button styles
-    const buttons = document.querySelectorAll('#bank-selector button');
-    buttons.forEach(btn => {
-        if(btn.textContent === bankCode) {
-            btn.style.background = 'linear-gradient(135deg, rgba(255,204,0,0.4), rgba(255,204,0,0.2))';
-            btn.style.boxShadow = '0 0 15px rgba(255,204,0,0.3)';
-        } else {
-            btn.style.background = 'rgba(255,204,0,0.15)';
-            btn.style.boxShadow = 'none';
-        }
-    });
-    
-    // Trigger search again with filter
-    if(currentLat && currentLng) {
-        findNearby(currentLat, currentLng);
-    }
-}
+// Tunisian banks list
 const TUNISIAN_BANKS = {
     'BNA': 'البنك الوطني الفلاحي',
     'STB': 'البنك الوطني التونسي',
@@ -1052,12 +1006,6 @@ function isValidBank(place) {
     // Exclude non-banks
     const excludeKeywords = ['CAFE', 'RESTAURANT', 'HOTEL', 'SHOP', 'MARKET'];
     const isExcluded = excludeKeywords.some(kw => name.includes(kw) || displayName.includes(kw));
-    
-    // Filter by selected bank if any
-    if(currentBankFilter) {
-        const hasBank = name.includes(currentBankFilter) || displayName.includes(currentBankFilter);
-        return isBankWord && !isExcluded && hasBank;
-    }
     
     return isBankWord && !isExcluded;
 }
@@ -1139,48 +1087,6 @@ window.onload=function(){
     sel.value = 'auto';
     panel.style.display = 'none';
     startGPS();
-    
-    // ── PWA SETUP ──
-    if('serviceWorker' in navigator) {
-        const sw = `
-            self.addEventListener('install', e => self.skipWaiting());
-            self.addEventListener('activate', e => e.waitUntil(clients.claim()));
-            self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response('Offline'))));
-        `;
-        const blob = new Blob([sw], {type: 'application/javascript'});
-        const swUrl = URL.createObjectURL(blob);
-        navigator.serviceWorker.register(swUrl).catch(err => console.log('SW error:', err));
-    }
-    
-    // ── INSTALL PROMPT ──
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', e => {
-        e.preventDefault();
-        deferredPrompt = e;
-        const installBtn = document.createElement('button');
-        installBtn.textContent = '📲 تثبيت التطبيق';
-        installBtn.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, rgba(255,204,0,0.4), rgba(255,204,0,0.2));
-            border: 1px solid var(--gold-bright);
-            color: var(--gold-shine);
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(255,204,0,0.3);
-        `;
-        installBtn.onclick = async () => {
-            deferredPrompt.prompt();
-            const {outcome} = await deferredPrompt.userChoice;
-            deferredPrompt = null;
-            installBtn.remove();
-        };
-        document.body.appendChild(installBtn);
-    });
 };
 </script>
 </body>
