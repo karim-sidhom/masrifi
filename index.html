@@ -819,7 +819,7 @@ async function fetchStations(lat,lon,r,ctrl){
 
 async function reverseGeocode(lat,lon){try{const res=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=ar`);if(!res.ok)throw new Error('');const d=await res.json();if(d&&d.address){const cc=d.address.country_code?d.address.country_code.toUpperCase():'';const city=d.address.city||d.address.town||d.address.village||'';const state=d.address.state||'';const country=d.address.country||'';return{countryCode:cc,city,state,country};}}catch(e){}return{countryCode:'',city:'',state:'',country:''};}
 
-async function findNearby(lat,lon){
+    async function findNearby(lat,lon){
     const seq=++stationSearchSeq;
     stationState('جارٍ البحث عن البنوك...');
     const geo=await reverseGeocode(lat,lon);
@@ -829,20 +829,20 @@ async function findNearby(lat,lon){
     const norm=places=>places.filter(p=>isValidBank(p)).map(p=>{const mL=parseFloat(p.lat),mO=parseFloat(p.lon);const n=p.name||(p.display_name&&p.display_name.split(',')[0].trim())||'بنك';return{name:n,lat:mL,lon:mO,dist:haversineKm(lat,lon,mL,mO)};}).sort((a,b)=>a.dist-b.dist);
     async function tryR(rIdx,req=true){
         const r=RADII[rIdx]; if(!r)return false;
-        stationState(`⛽ البحث في نطاق ${r<1?r*1000+' م':r+' كم'}...`);
+        stationState(`🏦 البحث في نطاق ${r<1?r*1000+' م':r+' كم'}...`);
         let pay,t=null;
         try{const ctrl=new AbortController();t=setTimeout(()=>ctrl.abort(),12000);pay=await fetchStations(lat,lon,r,ctrl);}
         catch(e){if(seq!==stationSearchSeq)return true;stationState('⚠️ تعذّر الاتصال بالخوادم. حاول مجدداً.');return true;}
         finally{if(t)clearTimeout(t);}
         if(seq!==stationSearchSeq)return true;
         const items=norm(pay.places||[]).filter(m=>m.dist<=r);
-        if(!items.length){if(req)return false;stationState(`لم يتم العثور على محطات وقود في نطاق ${r} كم.`);return true;}
+        if(!items.length){if(req)return false;stationState(`لم يتم العثور على بنوك في نطاق ${r} كم.`);return true;}
         const hasNext=rIdx<RADII.length-1;
         renderStations(items,r,5,label,hasNext?()=>tryR(rIdx+1,false):null);
         return true;
     }
     for(let i=0;i<RADII.length;i++){if(await tryR(i))return;}
-    stationState('لم يتم العثور على محطات وقود في هذه المنطقة.');
+    stationState('لم يتم العثور على بنوك في هذه المنطقة.');
 }
 
 function initApp(lat,lng){
