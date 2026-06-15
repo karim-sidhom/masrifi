@@ -984,15 +984,48 @@ function renderPrayerTimes(lat, lng) {
     }
 }
 
-// Tunisian banks list
+// Tunisian banks list with phone numbers
 const TUNISIAN_BANKS = {
-    'BNA': 'البنك الوطني الفلاحي',
-    'STB': 'البنك الوطني التونسي',
-    'BIAT': 'البنك الدولي العربي التونسي',
-    'UIB': 'البنك الوحدة الإنجاز البنكي',
-    'ATB': 'البنك العربي التونسي',
-    'UBCI': 'اتحاد البنوك الإسلامية',
-    'Attijari': 'بنك التجارة',
+    'BNA': {
+        name: 'البنك الوطني الفلاحي',
+        phone: '71 831 200',
+        emergency: '71 831 763'
+    },
+    'STB': {
+        name: 'البنك الوطني التونسي',
+        phone: '71 148 000',
+        emergency: '71 148 000'
+    },
+    'BIAT': {
+        name: 'البنك الدولي العربي التونسي',
+        phone: '71 340 733',
+        emergency: '71 340 733'
+    },
+    'UIB': {
+        name: 'البنك الوحدة الإنجاز البنكي',
+        phone: '71 799 000',
+        emergency: '71 799 000'
+    },
+    'ATB': {
+        name: 'البنك العربي التونسي',
+        phone: '71 961 961',
+        emergency: '71 961 961'
+    },
+    'UBCI': {
+        name: 'اتحاد البنوك الإسلامية',
+        phone: '71 962 000',
+        emergency: '71 962 000'
+    },
+    'Attijari': {
+        name: 'بنك التجارة',
+        phone: '70 012 000',
+        emergency: '70 012 000'
+    },
+    'BT': {
+        name: 'بنك تونس',
+        phone: '71 125 500',
+        emergency: '71 125 500'
+    }
 };
 
 function isValidBank(place) {
@@ -1008,6 +1041,19 @@ function isValidBank(place) {
     const isExcluded = excludeKeywords.some(kw => name.includes(kw) || displayName.includes(kw));
     
     return isBankWord && !isExcluded;
+}
+
+function getBankInfo(bankCode) {
+    const bankData = TUNISIAN_BANKS[bankCode];
+    if (!bankData) return null;
+    if (typeof bankData === 'object') {
+        return bankData;
+    }
+    return {
+        name: bankData,
+        phone: '--',
+        emergency: '--'
+    };
 }
 let adhanAudio = null;
 let adhanPlaying = false;
